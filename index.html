@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💕 A Special Message For You 💕</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #1a0a0a 0%, #2d1515 25%, #4a1a2c 50%, #2d1515 75%, #1a0a0a 100%);
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Floating Hearts & Flowers Container */
+        .particles-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            animation: float-up 8s ease-in-out infinite;
+            opacity: 0.8;
+            font-size: 24px;
+        }
+
+        @keyframes float-up {
+            0% {
+                transform: translateY(100vh) rotate(0deg) scale(0.5);
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 0.8;
+            }
+
+            90% {
+                opacity: 0.8;
+            }
+
+            100% {
+                transform: translateY(-100px) rotate(360deg) scale(1);
+                opacity: 0;
+            }
+        }
+
+        /* Glowing orbs background */
+        .glow-orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: 0;
+            animation: pulse-glow 4s ease-in-out infinite alternate;
+        }
+
+        .orb1 {
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(255, 105, 180, 0.4) 0%, transparent 70%);
+            top: 10%;
+            left: 10%;
+        }
+
+        .orb2 {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(255, 20, 147, 0.3) 0%, transparent 70%);
+            bottom: 10%;
+            right: 10%;
+            animation-delay: 2s;
+        }
+
+        .orb3 {
+            width: 250px;
+            height: 250px;
+            background: radial-gradient(circle, rgba(255, 182, 193, 0.3) 0%, transparent 70%);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation-delay: 1s;
+        }
+
+        @keyframes pulse-glow {
+            0% {
+                transform: scale(1);
+                opacity: 0.5;
+            }
+
+            100% {
+                transform: scale(1.2);
+                opacity: 0.8;
+            }
+        }
+
+        /* Main Content Screens */
+        .screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            z-index: 10;
+            padding: 20px;
+            padding-top: 40px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.8s ease;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+
+        .screen.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Center content for welcome screen */
+        .welcome-screen {
+            justify-content: center;
+            padding-top: 20px;
+        }
+
+        /* Screen 1: Welcome */
+        .welcome-screen .envelope {
+            width: 200px;
+            height: 150px;
+            position: relative;
+            cursor: pointer;
+            animation: envelope-float 3s ease-in-out infinite;
+            transition: transform 0.3s ease;
+        }
+
+        .welcome-screen .envelope:hover {
+            transform: scale(1.1);
+        }
+
+        @keyframes envelope-float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        .envelope-body {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(145deg, #ff6b9d, #ff8fab);
+            border-radius: 10px;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(255, 105, 180, 0.5),
+                inset 0 2px 10px rgba(255, 255, 255, 0.3);
+        }
+
+        .envelope-flap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 0;
+            border-left: 100px solid transparent;
+            border-right: 100px solid transparent;
+            border-top: 80px solid #ff4081;
+            transform-origin: top;
+            transition: transform 0.5s ease;
+        }
+
+        .envelope:hover .envelope-flap {
+            transform: rotateX(180deg);
+        }
+
+        .envelope-heart {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 50px;
+            animation: heartbeat 1s ease-in-out infinite;
+        }
+
+        @keyframes heartbeat {
+
+            0%,
+            100% {
+                transform: translate(-50%, -50%) scale(1);
+            }
+
+            50% {
+                transform: translate(-50%, -50%) scale(1.2);
+            }
+        }
+
+        .welcome-title {
+            font-family: 'Great Vibes', cursive;
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            color: #fff;
+            text-shadow: 0 0 30px rgba(255, 105, 180, 0.8),
+                0 0 60px rgba(255, 105, 180, 0.5);
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .welcome-subtitle {
+            font-size: clamp(1rem, 3vw, 1.5rem);
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .welcome-subtitle span {
+            color: #ff6b9d;
+            font-weight: 600;
+        }
+
+        .open-btn {
+            background: linear-gradient(135deg, #ff6b9d 0%, #ff4081 50%, #e91e63 100%);
+            border: none;
+            padding: 18px 50px;
+            font-size: 1.2rem;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            color: white;
+            border-radius: 50px;
+            cursor: pointer;
+            margin-top: 30px;
+            box-shadow: 0 10px 40px rgba(255, 64, 129, 0.5),
+                0 0 0 0 rgba(255, 105, 180, 0.7);
+            transition: all 0.3s ease;
+            animation: btn-glow 2s ease-in-out infinite;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .open-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% {
+                left: -100%;
+            }
+
+            100% {
+                left: 100%;
+            }
+        }
+
+        @keyframes btn-glow {
+
+            0%,
+            100% {
+                box-shadow: 0 10px 40px rgba(255, 64, 129, 0.5), 0 0 0 0 rgba(255, 105, 180, 0.7);
+            }
+
+            50% {
+                box-shadow: 0 10px 40px rgba(255, 64, 129, 0.8), 0 0 0 15px rgba(255, 105, 180, 0);
+            }
+        }
+
+        .open-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 15px 50px rgba(255, 64, 129, 0.7);
+        }
+
+        /* Screen 2: Message */
+        .message-screen {
+            background: radial-gradient(ellipse at center, rgba(255, 105, 180, 0.1) 0%, transparent 70%);
+        }
+
+        .message-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 105, 180, 0.3);
+            border-radius: 30px;
+            padding: 25px 30px;
+            max-width: 550px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            animation: card-appear 0.8s ease-out;
+            margin-bottom: 30px;
+        }
+
+        @keyframes card-appear {
+            0% {
+                transform: scale(0.8) translateY(50px);
+                opacity: 0;
+            }
+
+            100% {
+                transform: scale(1) translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .message-title {
+            font-family: 'Great Vibes', cursive;
+            font-size: clamp(3rem, 10vw, 5rem);
+            background: linear-gradient(135deg, #ff6b9d, #ff4081, #ff6b9d);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            animation: gradient-shift 3s ease infinite;
+            background-size: 200% 200%;
+        }
+
+        @keyframes gradient-shift {
+
+            0%,
+            100% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+        }
+
+        .message-gif {
+            width: 100%;
+            max-width: 280px;
+            height: 160px;
+            border-radius: 15px;
+            margin: 15px 0;
+            object-fit: cover;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .message-text {
+            color: rgba(255, 255, 255, 0.95);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin: 15px 0;
+        }
+
+        .message-text p {
+            margin-bottom: 12px;
+        }
+
+        .continue-btn {
+            background: linear-gradient(135deg, #ff6b9d 0%, #ff4081 100%);
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            color: white;
+            border-radius: 50px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(255, 64, 129, 0.4);
+        }
+
+        .continue-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255, 64, 129, 0.6);
+        }
+
+        /* Screen 3: Question */
+        .question-screen .question-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 105, 180, 0.3);
+            border-radius: 30px;
+            padding: 50px;
+            text-align: center;
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.3);
+            animation: card-appear 0.8s ease-out;
+        }
+
+        .question-title {
+            font-family: 'Great Vibes', cursive;
+            font-size: clamp(2.5rem, 8vw, 4rem);
+            color: #fff;
+            text-shadow: 0 0 30px rgba(255, 105, 180, 0.8);
+            margin-bottom: 40px;
+        }
+
+        .buttons-container {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            flex-wrap: wrap;
+            position: relative;
+            min-height: 80px;
+        }
+
+        .yes-btn,
+        .no-btn {
+            padding: 18px 50px;
+            font-size: 1.3rem;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+        }
+
+        .yes-btn {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+            box-shadow: 0 10px 30px rgba(76, 175, 80, 0.4);
+            animation: yes-pulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes yes-pulse {
+
+            0%,
+            100% {
+                box-shadow: 0 10px 30px rgba(76, 175, 80, 0.4), 0 0 0 0 rgba(76, 175, 80, 0.4);
+            }
+
+            50% {
+                box-shadow: 0 10px 30px rgba(76, 175, 80, 0.6), 0 0 0 10px rgba(76, 175, 80, 0);
+            }
+        }
+
+        .yes-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 15px 40px rgba(76, 175, 80, 0.6);
+        }
+
+        .no-btn {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a5a);
+            color: white;
+            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.3);
+            position: absolute;
+            transition: all 0.2s ease;
+        }
+
+        .no-btn:hover {
+            transform: scale(0.9);
+        }
+
+        /* Screen 4: Yes Response */
+        .yes-screen {
+            background: radial-gradient(ellipse at center, rgba(76, 175, 80, 0.2) 0%, transparent 70%);
+        }
+
+        .celebration-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(76, 175, 80, 0.3);
+            border-radius: 30px;
+            padding: 50px;
+            text-align: center;
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.3);
+            animation: celebration-appear 0.8s ease-out;
+        }
+
+        @keyframes celebration-appear {
+            0% {
+                transform: scale(0) rotate(-10deg);
+                opacity: 0;
+            }
+
+            50% {
+                transform: scale(1.1) rotate(5deg);
+            }
+
+            100% {
+                transform: scale(1) rotate(0deg);
+                opacity: 1;
+            }
+        }
+
+        .celebration-title {
+            font-family: 'Great Vibes', cursive;
+            font-size: clamp(3rem, 10vw, 5rem);
+            background: linear-gradient(135deg, #4CAF50, #81C784, #4CAF50);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            animation: gradient-shift 3s ease infinite;
+            background-size: 200% 200%;
+        }
+
+        .celebration-hearts {
+            font-size: 4rem;
+            margin: 20px 0;
+            animation: hearts-dance 1s ease-in-out infinite;
+        }
+
+        @keyframes hearts-dance {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            25% {
+                transform: scale(1.1) rotate(-5deg);
+            }
+
+            75% {
+                transform: scale(1.1) rotate(5deg);
+            }
+        }
+
+        .celebration-message {
+            color: rgba(255, 255, 255, 0.95);
+            font-size: 1.2rem;
+            line-height: 1.8;
+        }
+
+        .email-status {
+            margin-top: 20px;
+            padding: 15px 30px;
+            background: rgba(76, 175, 80, 0.2);
+            border: 1px solid rgba(76, 175, 80, 0.5);
+            border-radius: 15px;
+            color: #81C784;
+            font-size: 0.9rem;
+        }
+
+        /* Confetti */
+        .confetti-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 100;
+            overflow: hidden;
+        }
+
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            animation: confetti-fall 4s ease-out forwards;
+        }
+
+        @keyframes confetti-fall {
+            0% {
+                transform: translateY(-100px) rotate(0deg);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        /* Audio control */
+        .audio-control {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .audio-control:hover {
+            transform: scale(1.1);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+
+            .message-card,
+            .question-card,
+            .celebration-card {
+                padding: 25px;
+                margin: 10px;
+            }
+
+            .buttons-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .no-btn {
+                position: relative;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Background Elements -->
+    <div class="glow-orb orb1"></div>
+    <div class="glow-orb orb2"></div>
+    <div class="glow-orb orb3"></div>
+
+    <!-- Floating Particles -->
+    <div class="particles-container" id="particles"></div>
+
+    <!-- Confetti Container -->
+    <div class="confetti-container" id="confetti"></div>
+
+    <!-- Screen 1: Welcome -->
+    <div class="screen welcome-screen active" id="screen1">
+        <h1 class="welcome-title">Hey Handsome! 💕</h1>
+        <p class="welcome-subtitle">
+            <span id="boyName">Given</span>, you have a special message from <span id="girlName">Lissa</span>
+        </p>
+
+        <div class="envelope" onclick="openMessage()">
+            <div class="envelope-body">
+                <div class="envelope-heart">💌</div>
+            </div>
+            <div class="envelope-flap"></div>
+        </div>
+
+        <button class="open-btn" onclick="openMessage()">💗 Open Your Message 💗</button>
+    </div>
+
+    <!-- Screen 2: Valentine Message -->
+    <div class="screen message-screen" id="screen2">
+        <div class="message-card">
+            <h1 class="message-title">Happy Valentine's Day!</h1>
+
+            <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExcnUxOHZtazlyb3NldWdxOWx6b3gyYjM1dmJoaWsxeXJvdThhaWw5YyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l0HlQXlQ3nHyLMvte/giphy.gif"
+                alt="Romantic GIF" class="message-gif"
+                onerror="this.src='https://media.giphy.com/media/26BRv0ThflsHCqDrG/giphy.gif'">
+
+            <div class="message-text">
+                <p>You are my rock, my safe place, and the reason I smile every day. Every moment with you feels like
+                    magic. 🎵</p>
+                <p>You're my best friend, my everything. I'm so lucky to have you, Given. �❤️</p>
+            </div>
+
+            <button class="continue-btn" onclick="showQuestion()">Continue 💝</button>
+        </div>
+    </div>
+
+    <!-- Screen 3: The Question -->
+    <div class="screen question-screen" id="screen3">
+        <div class="question-card">
+            <h1 class="question-title">Will You Be My Valentine? 💍</h1>
+
+            <div class="buttons-container" id="buttonsContainer">
+                <button class="yes-btn" onclick="sayYes()">Yes! 💕</button>
+                <button class="no-btn" id="noBtn" onmouseover="moveNoButton()" ontouchstart="moveNoButton()">No
+                    😢</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Screen 4: Celebration -->
+    <div class="screen yes-screen" id="screen4">
+        <div class="celebration-card">
+            <h1 class="celebration-title">Yay! You Said Yes!</h1>
+            <div class="celebration-hearts">💕💖💕</div>
+            <p class="celebration-message">
+                You've made me the happiest girl in the world! 🌟<br>
+                I promise to love you, cherish you, and be your biggest supporter forever!<br>
+                This is our love story, and it's only getting better! 💝
+            </p>
+            <div class="email-status" id="emailStatus">
+                ✨ Sending love notification... ✨
+            </div>
+        </div>
+    </div>
+
+    <!-- Audio Control -->
+    <div class="audio-control" id="audioControl" onclick="toggleAudio()">🔇</div>
+
+    <!-- Background Music - Soft Romantic Piano -->
+    <audio id="bgMusic" loop preload="auto">
+        <source src="https://cdn.pixabay.com/audio/2022/01/18/audio_d0a13f69d2.mp3" type="audio/mpeg">
+        <source src="https://cdn.pixabay.com/audio/2021/11/25/audio_91b32e02f9.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        // ============================================
+        // CONFIGURATION - CUSTOMIZE THESE VALUES!
+        // ============================================
+        const CONFIG = {
+            boyName: "Given",               // The boy receiving this
+            girlName: "Lissa",              // The girl sending this
+            girlEmail: "lissa@example.com", // Lissa's email to receive notification when he says YES
+
+            // EmailJS Configuration (free email service)
+            // Sign up at https://www.emailjs.com/ and get these values
+            emailJS: {
+                serviceID: "YOUR_SERVICE_ID",
+                templateID: "YOUR_TEMPLATE_ID",
+                publicKey: "MI-MNlPEhYbTOFsDz"
+            }
+        };
+
+        // Apply names (already set in HTML, this is for dynamic use)
+        document.getElementById('boyName').textContent = CONFIG.boyName;
+        document.getElementById('girlName').textContent = CONFIG.girlName;
+
+        // Audio state
+        let isPlaying = false;
+        const bgMusic = document.getElementById('bgMusic');
+        bgMusic.volume = 0.15; // Soft romantic volume
+
+        // Create floating particles
+        function createParticles() {
+            const container = document.getElementById('particles');
+            const particles = ['💕', '❤️', '💗', '💖', '🌹', '💐', '✨', '💝', '🌸', '💘'];
+
+            for (let i = 0; i < 30; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.textContent = particles[Math.floor(Math.random() * particles.length)];
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 8 + 's';
+                particle.style.fontSize = (Math.random() * 20 + 15) + 'px';
+                container.appendChild(particle);
+            }
+        }
+
+        // Create confetti explosion
+        function createConfetti() {
+            const container = document.getElementById('confetti');
+            const colors = ['#ff6b9d', '#ff4081', '#4CAF50', '#FFD700', '#ff69b4', '#ff1493'];
+
+            for (let i = 0; i < 100; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + '%';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.animationDelay = Math.random() * 2 + 's';
+                confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+                container.appendChild(confetti);
+            }
+        }
+
+        // Screen transitions
+        function showScreen(screenId) {
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            document.getElementById(screenId).classList.add('active');
+        }
+
+        function openMessage() {
+            showScreen('screen2');
+            playAudio();
+        }
+
+        function showQuestion() {
+            showScreen('screen3');
+        }
+
+        // The sneaky No button
+        function moveNoButton() {
+            const btn = document.getElementById('noBtn');
+            const container = document.getElementById('buttonsContainer');
+            const containerRect = container.getBoundingClientRect();
+
+            const maxX = containerRect.width - btn.offsetWidth - 20;
+            const maxY = containerRect.height - btn.offsetHeight - 20;
+
+            const randomX = Math.random() * maxX - maxX / 2;
+            const randomY = Math.random() * maxY - maxY / 2;
+
+            btn.style.transform = `translate(${randomX}px, ${randomY}px)`;
+
+            // Fun messages
+            const messages = ["Nope!", "Try again!", "Can't catch me!", "Not happening!", "Really?", "😜"];
+            btn.textContent = messages[Math.floor(Math.random() * messages.length)];
+        }
+
+        // He said YES!
+        function sayYes() {
+            showScreen('screen4');
+            createConfetti();
+            sendEmailNotification();
+        }
+
+        // Send email notification to Lissa
+        async function sendEmailNotification() {
+            const statusEl = document.getElementById('emailStatus');
+
+            // Option 1: Using EmailJS (recommended - free tier allows 200 emails/month)
+            if (CONFIG.emailJS.serviceID !== "YOUR_SERVICE_ID") {
+                try {
+                    // Load EmailJS SDK
+                    if (!window.emailjs) {
+                        const script = document.createElement('script');
+                        script.src = 'https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js';
+                        document.head.appendChild(script);
+                        await new Promise(resolve => script.onload = resolve);
+                    }
+
+                    emailjs.init(CONFIG.emailJS.publicKey);
+
+                    await emailjs.send(CONFIG.emailJS.serviceID, CONFIG.emailJS.templateID, {
+                        to_email: CONFIG.girlEmail,
+                        girl_name: CONFIG.girlName,
+                        boy_name: CONFIG.boyName,
+                        message: `🎉 Amazing news! ${CONFIG.boyName} said YES to being your Valentine! 💕`
+                    });
+
+                    statusEl.innerHTML = '💌 Love notification sent to Lissa! 💌';
+                    statusEl.style.background = 'rgba(76, 175, 80, 0.3)';
+                } catch (error) {
+                    console.log('Email error:', error);
+                    statusEl.innerHTML = '💕 He said YES! Screenshot this moment! 💕';
+                }
+            } else {
+                // Fallback: Just show celebration
+                setTimeout(() => {
+                    statusEl.innerHTML = '💕 He said YES! The most beautiful word! 💕';
+                    statusEl.style.background = 'rgba(76, 175, 80, 0.3)';
+                }, 2000);
+            }
+        }
+
+        // Audio controls
+        function toggleAudio() {
+            if (isPlaying) {
+                bgMusic.pause();
+                document.getElementById('audioControl').textContent = '🔇';
+            } else {
+                playAudio();
+            }
+            isPlaying = !isPlaying;
+        }
+
+        function playAudio() {
+            bgMusic.play().then(() => {
+                isPlaying = true;
+                document.getElementById('audioControl').textContent = '🔊';
+            }).catch(() => {
+                console.log('Audio autoplay blocked - user needs to click audio button');
+            });
+        }
+
+        // Initialize
+        createParticles();
+    </script>
+</body>
+
+</html>
